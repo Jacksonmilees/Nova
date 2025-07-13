@@ -234,6 +234,22 @@ DOCS:
     except Exception as e:
         return f"❌ Failed to learn API: {e}"
 
+def call_ollama(query):
+    """Call the remote Ollama API on the VPS server with health check."""
+    try:
+        response = requests.post(
+            "http://164.68.118.21:5001",
+            json={"message": query},
+            timeout=30
+        )
+        if response.status_code == 200:
+            data = response.json()
+            return data.get("response", "No response from Ollama")
+        else:
+            return f"Ollama API error: {response.status_code}"
+    except Exception as e:
+        return f"Ollama connection error: {str(e)}"
+
 # ======== GEMINI ENGINE ======== #
 def think(prompt):
     print(f"🔍 Processing: {prompt}")
@@ -248,6 +264,12 @@ def think(prompt):
         return f"Task added: {task}"
     elif prompt.startswith("list tasks"):
         return list_tasks()
+    elif prompt.startswith("ask local:"):
+        # Always use remote Ollama API for 'ask local:'
+        query = prompt.replace("ask local:", "").strip()
+        response = call_ollama(query)
+        update_memory(f"Ollama answered: {response}")
+        return response
     elif prompt.startswith("complete task"):
         task = prompt.replace("complete task", "").strip()
         return mark_task_done(task)

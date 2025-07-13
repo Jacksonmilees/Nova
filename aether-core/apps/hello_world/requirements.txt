@@ -1,0 +1,3 @@
+```
+# No external dependencies needed for this simple application
+```

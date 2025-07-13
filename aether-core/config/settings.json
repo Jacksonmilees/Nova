@@ -1,0 +1,7 @@
+{
+    "GEMINI_API_KEY": "AIzaSyCCf3ROn_yaVcs7Eru2U-C6lKnOm2zTv9Y",
+    "MODEL": "gemini-1.5-flash",
+    "DEBUG": true,
+    "USE_LOGS": true
+  }
+  

@@ -1,0 +1,15 @@
+[Unit]
+Description=NOVA Core Initiative
+After=network.target ollama.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/nova/aether-core
+ExecStart=/root/nova/aether-core/nova_env/bin/python main.py
+Restart=always
+RestartSec=10
+Environment=PYTHONPATH=/root/nova/aether-core
+
+[Install]
+WantedBy=multi-user.target 

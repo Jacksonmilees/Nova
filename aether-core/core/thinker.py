@@ -9,7 +9,7 @@ import inspect
 import requests
 from pathlib import Path
 from vault import get_secret
-from interface.voice import speak, listen
+# from interface.voice import speak, listen
 from actions.system_control import system
 
 # ======== SETTINGS ======== #
